@@ -1,5 +1,5 @@
 import { CalendarDays, CheckCircle2, MapPin, MessageCircle, Star } from "lucide-react";
-import { siteConfig } from "@/constants/site";
+import { siteConfig } from "@/lib/site";
 
 export default function Hero() {
   const whatsappUrl = `https://wa.me/${siteConfig.phone}?text=${encodeURIComponent(

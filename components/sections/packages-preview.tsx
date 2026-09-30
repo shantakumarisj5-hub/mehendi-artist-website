@@ -10,32 +10,19 @@ export function PackagesPreview() {
         <SectionHeading
           eyebrow="Packages"
           title="Simple packages, beautiful memories."
-          description="Use these as visible frontend prices for now. Replace them later with live, editable package data."
+          description="Choose a package that fits your celebration and Mehendi requirements."
           center
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {packages.map((item) => (
             <article
-              key={item.name}
-              className={`relative rounded-3xl border p-7 ${
-                item.featured
-                  ? "border-[#3b2417] bg-[#3b2417] text-white shadow-xl shadow-[#6b422a]/15"
-                  : "border-[#ead9ca] bg-white text-[#3b2417]"
-              }`}
+              key={item.id}
+              className="relative rounded-3xl border border-[#ead9ca] bg-white p-7 text-[#3b2417]"
             >
-              {item.featured && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#c98155] px-4 py-1 text-xs font-bold text-white">
-                  Most popular
-                </span>
-              )}
-
               <h3 className="font-serif text-3xl">{item.name}</h3>
-              <p
-                className={`mt-3 text-sm leading-6 ${
-                  item.featured ? "text-[#ead9ca]" : "text-stone-600"
-                }`}
-              >
+
+              <p className="mt-3 text-sm leading-6 text-stone-600">
                 {item.description}
               </p>
 
@@ -52,11 +39,7 @@ export function PackagesPreview() {
 
               <Link
                 href="/booking"
-                className={`mt-8 block rounded-full px-5 py-3 text-center text-sm font-semibold transition-colors ${
-                  item.featured
-                    ? "bg-[#fffaf6] text-[#3b2417] hover:bg-[#f2e4d8]"
-                    : "bg-[#3b2417] text-white hover:bg-[#5a3825]"
-                }`}
+                className="mt-8 block rounded-full bg-[#3b2417] px-5 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[#5a3825]"
               >
                 Enquire now
               </Link>
