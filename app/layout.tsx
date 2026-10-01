@@ -39,6 +39,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="PNQdCiXjhTILSdz3rvHsduHgZb6v_1KtsLaI7BwNL1A"
+        />
+      </head>
+
       <body className={`${poppins.variable} ${playfair.variable}`}>
         <Navbar />
         {children}
