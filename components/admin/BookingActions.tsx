@@ -9,15 +9,6 @@ type BookingActionsProps = {
   status: string;
 };
 
-type BookingData = {
-  customer_name: string;
-  email: string | null;
-  event_date: string;
-  event_time: string | null;
-  service: string;
-  location: string;
-};
-
 export default function BookingActions({
   bookingId,
   status,
@@ -28,24 +19,7 @@ export default function BookingActions({
     setIsUpdating(true);
 
     try {
-      // 1. Get booking details
-      const { data: booking, error: fetchError } = await supabase
-        .from("bookings")
-        .select(
-          "customer_name, email, event_date, event_time, service, location",
-        )
-        .eq("id", bookingId)
-        .single();
-
-      if (fetchError || !booking) {
-        console.error("Booking fetch error:", fetchError);
-        alert("Unable to find booking.");
-        return;
-      }
-
-      const bookingData = booking as BookingData;
-
-      // 2. Update booking status
+      // Update booking status
       const { error: updateError } = await supabase
         .from("bookings")
         .update({ status: newStatus })
@@ -57,42 +31,7 @@ export default function BookingActions({
         return;
       }
 
-      // 3. Send email if customer provided an email
-      if (bookingData.email) {
-        const emailResponse = await fetch("/api/send-booking-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            customerName: bookingData.customer_name,
-            customerEmail: bookingData.email,
-            status: newStatus,
-            eventDate: bookingData.event_date,
-            eventTime: bookingData.event_time,
-            service: bookingData.service,
-            location: bookingData.location,
-          }),
-        });
-
-        const emailResult = await emailResponse.json();
-
-        if (!emailResponse.ok) {
-          console.error("Email sending failed:", emailResult);
-
-          alert(
-            "Booking status updated, but the email could not be sent.",
-          );
-
-          return;
-        }
-
-        console.log("Email sent successfully:", emailResult);
-      } else {
-        console.log("Customer did not provide an email address.");
-      }
-
-      // 4. Refresh admin dashboard
+      // Refresh admin dashboard
       window.location.reload();
     } catch (error) {
       console.error("Booking action error:", error);
