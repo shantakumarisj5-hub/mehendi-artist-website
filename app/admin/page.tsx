@@ -1,8 +1,17 @@
-import { supabase } from "@/lib/supabase";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import BookingActions from "@/components/admin/BookingActions";
 
 export default async function AdminPage() {
-  const { data: bookings, error } = await supabase
+  const cookieStore = await cookies();
+  const adminSession = cookieStore.get("admin_session")?.value;
+
+  if (adminSession !== "authenticated") {
+    redirect("/admin/login");
+  }
+
+  const { data: bookings, error } = await supabaseAdmin
     .from("bookings")
     .select("*")
     .order("created_at", { ascending: false });
@@ -22,7 +31,6 @@ export default async function AdminPage() {
     <main className="min-h-screen bg-[#fffaf6]">
       <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
 
-        {/* Header */}
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#9a6040]">
             Admin Panel
@@ -37,14 +45,12 @@ export default async function AdminPage() {
           </p>
         </div>
 
-        {/* Error */}
         {error && (
           <div className="mt-8 rounded-2xl border border-red-200 bg-red-50 p-5 text-sm text-red-700">
             Unable to load bookings. Please check your Supabase connection.
           </div>
         )}
 
-        {/* Statistics */}
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
           <div className="rounded-2xl border border-[#ead9ca] bg-white p-6 shadow-sm">
@@ -77,7 +83,6 @@ export default async function AdminPage() {
 
         </div>
 
-        {/* Bookings */}
         <section className="mt-10 overflow-hidden rounded-3xl border border-[#ead9ca] bg-white shadow-sm">
 
           <div className="border-b border-[#ead9ca] p-6">
@@ -97,47 +102,36 @@ export default async function AdminPage() {
 
                 <thead className="bg-[#fffaf6]">
                   <tr>
-
                     <th className="px-6 py-4 text-sm font-semibold text-[#3b2417]">
                       Customer
                     </th>
-
                     <th className="px-6 py-4 text-sm font-semibold text-[#3b2417]">
                       Package
                     </th>
-
                     <th className="px-6 py-4 text-sm font-semibold text-[#3b2417]">
                       Date
                     </th>
-
                     <th className="px-6 py-4 text-sm font-semibold text-[#3b2417]">
                       Time
                     </th>
-
                     <th className="px-6 py-4 text-sm font-semibold text-[#3b2417]">
                       Location
                     </th>
-
                     <th className="px-6 py-4 text-sm font-semibold text-[#3b2417]">
                       Status
                     </th>
-
                     <th className="px-6 py-4 text-sm font-semibold text-[#3b2417]">
                       Actions
                     </th>
-
                   </tr>
                 </thead>
 
                 <tbody>
-
                   {bookings.map((booking) => (
                     <tr
                       key={booking.id}
                       className="border-t border-[#ead9ca]"
                     >
-
-                      {/* Customer */}
                       <td className="px-6 py-5">
                         <p className="font-semibold text-[#3b2417]">
                           {booking.customer_name}
@@ -154,27 +148,22 @@ export default async function AdminPage() {
                         )}
                       </td>
 
-                      {/* Package */}
                       <td className="px-6 py-5 text-sm text-stone-700">
                         {booking.service}
                       </td>
 
-                      {/* Date */}
                       <td className="px-6 py-5 text-sm text-stone-700">
                         {booking.event_date}
                       </td>
 
-                      {/* Time */}
                       <td className="px-6 py-5 text-sm text-stone-700">
                         {booking.event_time || "Not specified"}
                       </td>
 
-                      {/* Location */}
                       <td className="px-6 py-5 text-sm text-stone-700">
                         {booking.location}
                       </td>
 
-                      {/* Status */}
                       <td className="px-6 py-5">
                         <span
                           className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
@@ -189,17 +178,14 @@ export default async function AdminPage() {
                         </span>
                       </td>
 
-                      {/* Actions */}
                       <td className="px-6 py-5">
                         <BookingActions
                           bookingId={booking.id}
                           status={booking.status}
                         />
                       </td>
-
                     </tr>
                   ))}
-
                 </tbody>
 
               </table>

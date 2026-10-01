@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Check, Loader2, X } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 
 type BookingActionsProps = {
   bookingId: string;
@@ -19,19 +18,25 @@ export default function BookingActions({
     setIsUpdating(true);
 
     try {
-      // Update booking status
-      const { error: updateError } = await supabase
-        .from("bookings")
-        .update({ status: newStatus })
-        .eq("id", bookingId);
+      const response = await fetch("/api/admin/bookings/status", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          bookingId,
+          status: newStatus,
+        }),
+      });
 
-      if (updateError) {
-        console.error("Booking status update error:", updateError);
-        alert("Unable to update booking status.");
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error("Booking status update failed:", result);
+        alert(result.error || "Unable to update booking.");
         return;
       }
 
-      // Refresh admin dashboard
       window.location.reload();
     } catch (error) {
       console.error("Booking action error:", error);
