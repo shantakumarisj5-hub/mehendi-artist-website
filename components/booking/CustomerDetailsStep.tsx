@@ -127,7 +127,7 @@ export function CustomerDetailsStep({
 
           <input
             {...register("location")}
-            placeholder="Example: Mysuru"
+            placeholder="Example: Davangere"
             className="w-full rounded-2xl border border-[#ead9ca] bg-white px-4 py-3.5 outline-none focus:border-[#7d4727] focus:ring-2 focus:ring-[#7d4727]/10"
           />
 

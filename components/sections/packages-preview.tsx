@@ -3,7 +3,11 @@ import { Check } from "lucide-react";
 import { packages } from "@/lib/mock-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 
-export function PackagesPreview() {
+export function PackagesPreview({
+  headingLevel = "h2",
+}: {
+  headingLevel?: "h1" | "h2";
+}) {
   return (
     <section className="bg-[#fffaf6] py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -12,6 +16,7 @@ export function PackagesPreview() {
           title="Simple packages, beautiful memories."
           description="Choose a package that fits your celebration and Mehendi requirements."
           center
+          level={headingLevel}
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">

@@ -1,10 +1,13 @@
+import type { Metadata } from "next";
 import { BookingWizard } from "@/components/booking/BookingWizard";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Book Your Mehendi | Ananya Mehendi Art",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Book Your Mehendi",
   description:
-    "Choose your date, Mehendi package and event details with Ananya Mehendi Art.",
-};
+    "Send a Mehendi booking enquiry to ShantaKumari Mehendi Art in Davangere. Choose your date, service and event details.",
+  path: "/booking",
+});
 
 export default function BookingPage() {
   return (
@@ -12,7 +15,7 @@ export default function BookingPage() {
       <section className="border-b border-[#ead9ca] bg-[#3b2417]">
         <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20 lg:px-8">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#e7c8ad]">
-            Ananya Mehendi Art
+            ShantaKumari Mehendi Art
           </p>
 
           <h1 className="mt-4 max-w-3xl font-serif text-4xl text-white sm:text-5xl lg:text-6xl">

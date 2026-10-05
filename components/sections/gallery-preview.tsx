@@ -49,7 +49,7 @@ export function GalleryPreview() {
             >
               <Image
                 src={item.image}
-                alt={`${item.title} ${item.category} Mehendi design`}
+                alt={`${item.title} ${item.category} Mehendi design by ShantaKumari Mehendi Art`}
                 fill
                 className="object-cover transition duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 90vw, 33vw"

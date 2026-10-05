@@ -7,9 +7,9 @@ export function Reviews() {
     <section className="bg-[#fffaf6] py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Client love"
+          eyebrow="Client experiences"
           title="Celebrations made even more special."
-          description="Client testimonials and experiences."
+          description="Read experiences shared by clients who chose Shan Mehendi Art for their celebrations."
           center
         />
 
@@ -19,24 +19,29 @@ export function Reviews() {
               key={review.id}
               className="rounded-2xl border border-[#ead9ca] bg-white p-6"
             >
-              <Quote className="size-8 text-[#c98155]" />
+              <Quote
+                aria-hidden="true"
+                className="size-8 text-[#c98155]"
+              />
 
               <p className="mt-5 text-sm leading-7 text-stone-600">
                 “{review.text}”
               </p>
 
-              <div className="mt-6 flex items-center justify-between">
-                <div>
-                  <p className="font-semibold text-[#3b2417]">
-                    {review.name}
-                  </p>
-                </div>
+              <div className="mt-6 flex items-center justify-between gap-4">
+                <p className="font-semibold text-[#3b2417]">
+                  {review.name}
+                </p>
 
-                <div className="flex text-[#c98155]">
+                <div
+                  className="flex"
+                  aria-label={`${review.rating} out of 5 stars`}
+                >
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star
                       key={star}
-                      className={`size-4 ${
+                      aria-hidden="true"
+                      className={`size-4 text-[#c98155] ${
                         star <= review.rating ? "fill-current" : ""
                       }`}
                     />

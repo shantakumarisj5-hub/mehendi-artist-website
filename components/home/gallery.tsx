@@ -59,9 +59,8 @@ export default function Gallery() {
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
                   src={item.image}
-                  alt={item.title}
+                  alt={`${item.title} ${item.category} Mehendi design by ShantaKumari Mehendi Art`}
                   fill
-                  priority
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />

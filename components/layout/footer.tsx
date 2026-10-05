@@ -105,15 +105,17 @@ export function Footer() {
           </Link>
 
           <div className="mt-6 flex gap-3">
-            <a
-              href={siteConfig.instagram}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram profile"
-              className="rounded-full bg-[#5a3825] p-3 transition-colors hover:bg-[#7d4727]"
-            >
-              <Camera className="size-4" />
-            </a>
+            {siteConfig.instagram && (
+              <a
+                href={siteConfig.instagram}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram profile"
+                className="rounded-full bg-[#5a3825] p-3 transition-colors hover:bg-[#7d4727]"
+              >
+                <Camera className="size-4" />
+              </a>
+            )}
 
             <a
               href={`https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`}

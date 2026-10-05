@@ -29,12 +29,15 @@ export function Faq() {
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
+                  aria-expanded={isOpen}
                   className="flex w-full items-center justify-between gap-5 px-5 py-5 text-left"
                 >
                   <span className="font-semibold text-[#3b2417]">
                     {faq.question}
                   </span>
+
                   <ChevronDown
+                    aria-hidden="true"
                     className={`size-5 shrink-0 text-[#9b5d32] transition-transform ${
                       isOpen ? "rotate-180" : ""
                     }`}

@@ -1,15 +1,22 @@
 import type { MetadataRoute } from "next";
-
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://shantakumari-mehandi.vercel.app/";
+import { absoluteUrl, shouldIndex } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
+  if (!shouldIndex) {
+    return {
+      rules: {
+        userAgent: "*",
+        disallow: "/",
+      },
+    };
+  }
+
   return {
     rules: {
       userAgent: "*",
       allow: "/",
       disallow: ["/admin", "/api"],
     },
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: absoluteUrl("/sitemap.xml"),
   };
 }

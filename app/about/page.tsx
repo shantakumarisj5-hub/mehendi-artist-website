@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "About the Mehendi Artist",
+  description:
+    "Learn about ShantaKumari Mehendi Art in Davangere and the approach behind personalised bridal, Arabic and traditional Mehendi designs.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
@@ -7,10 +16,11 @@ export default function AboutPage() {
       <section className="bg-[#fffaf6] px-6 py-20 sm:py-28">
         <div className="mx-auto max-w-4xl">
           <SectionHeading
-            eyebrow="About Ananya Mehendi Art"
+            eyebrow="About ShantaKumari Mehendi Art"
             title="Thoughtful Mehendi for meaningful celebrations."
-            description="Ananya Mehendi Art creates personalised bridal and occasion Mehendi designs in Mysuru with a focus on detail, elegance, and a calm booking experience."
+            description="ShantaKumari Mehendi Art creates personalised bridal and occasion Mehendi designs in Davangere, Karnataka, with a focus on detail, elegance and a calm booking experience."
             center
+            level="h1"
           />
 
           <div className="mt-10 space-y-5 text-base leading-8 text-stone-600">

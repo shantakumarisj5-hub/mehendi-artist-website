@@ -11,7 +11,7 @@ export function WhatsAppButton() {
       href={`https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`}
       target="_blank"
       rel="noreferrer"
-      aria-label="Contact Ananya Mehendi Art on WhatsApp"
+      aria-label="Contact ShantaKumari Mehendi Art on WhatsApp"
       className="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-[#25d366] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-green-900/20 transition-transform hover:scale-105"
     >
       <MessageCircle className="size-5" />

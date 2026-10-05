@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock } from "lucide-react";
 import { services } from "@/lib/mock-data";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Mehendi Services in Davangere",
+  description:
+    "Explore bridal, engagement, party and Arabic Mehendi services from ShantaKumari Mehendi Art in Davangere, Karnataka.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
@@ -12,6 +21,7 @@ export default function ServicesPage() {
           title="Mehendi for every meaningful occasion."
           description="Explore signature styles and choose the one that fits your celebration."
           center
+          level="h1"
         />
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">

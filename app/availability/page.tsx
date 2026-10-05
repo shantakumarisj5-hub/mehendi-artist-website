@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Mehendi Availability in Davangere",
+  description:
+    "View the displayed Mehendi availability calendar for ShantaKumari Mehendi Art in Davangere and send a booking enquiry for your date.",
+  path: "/availability",
+});
 
 const dates = Array.from({ length: 30 }, (_, index) => index + 1);
 const unavailableDates = [3, 7, 12, 18, 21, 27];
@@ -11,8 +20,9 @@ export default function AvailabilityPage() {
         <SectionHeading
           eyebrow="Availability"
           title="Find a date for your Mehendi."
-          description="This is a frontend display calendar, not live availability. It will connect to the booking database later."
+          description="This calendar is a frontend availability display. Send a booking enquiry to confirm your preferred date."
           center
+          level="h1"
         />
 
         <div className="mt-12 rounded-3xl border border-[#ead9ca] bg-white p-6 sm:p-8">

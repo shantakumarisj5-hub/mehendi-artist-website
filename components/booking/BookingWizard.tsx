@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
 import { packages } from "@/lib/mock-data";
-import { supabase } from "@/lib/supabase";
 
 import { BookingProgress } from "./BookingProgress";
 import { DateTimeStep } from "./DateTimeStep";
@@ -64,33 +63,46 @@ export function BookingWizard() {
     setIsSubmitting(true);
     setSubmitError("");
 
-    const { error } = await supabase.from("bookings").insert({
-      customer_name: customerData.name,
-      phone: customerData.phone,
-      email: customerData.email || null,
-      event_date: selectedDate,
-      event_time: selectedTime || null,
-      event_type: "Mehendi Booking",
-      service: selectedPackageData.name,
-      location: customerData.location,
-      guests: null,
-      message: customerData.specialRequest || null,
-      status: "pending",
-    });
+    try {
+      const response = await fetch("/api/booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer_name: customerData.name,
+          phone: customerData.phone,
+          email: customerData.email || null,
+          event_date: selectedDate,
+          event_time: selectedTime || null,
+          event_type: "Mehendi Booking",
+          service: selectedPackageData.name,
+          location: customerData.location,
+          guests: null,
+          message: customerData.specialRequest || null,
+        }),
+      });
 
-    if (error) {
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error("Booking API error:", result);
+
+        throw new Error(
+          result.error || "Unable to submit your booking.",
+        );
+      }
+
+      setSubmitted(true);
+    } catch (error) {
       console.error("Booking submission error:", error);
 
       setSubmitError(
         "We couldn't submit your booking right now. Please try again.",
       );
-
+    } finally {
       setIsSubmitting(false);
-      return;
     }
-
-    setIsSubmitting(false);
-    setSubmitted(true);
   };
 
   if (submitted) {

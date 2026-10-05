@@ -24,16 +24,14 @@ export default function GalleryPage() {
   return (
     <main className="bg-[#fffaf6]">
       <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28 lg:px-8">
-
-        {/* Heading */}
         <SectionHeading
           eyebrow="Portfolio"
           title="Mehendi styles made for your celebration."
           description="Explore our collection of bridal, Arabic, Indo-Arabic and traditional Mehendi designs."
           center
+          level="h1"
         />
 
-        {/* Category buttons */}
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           {categories.map((category) => (
             <button
@@ -51,7 +49,6 @@ export default function GalleryPage() {
           ))}
         </div>
 
-        {/* Gallery */}
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {visibleItems.map((item) => (
             <article
@@ -59,19 +56,16 @@ export default function GalleryPage() {
               className="group relative overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-[#ead9ca] transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="relative aspect-[4/5] overflow-hidden">
-
                 <Image
                   src={item.image}
-                  alt={item.title}
+                  alt={`${item.title} ${item.category} Mehendi design by ShantaKumari Mehendi Art`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
 
-                {/* Dark overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
 
-                {/* Image information */}
                 <div className="absolute inset-x-0 bottom-0 p-6 text-white">
                   <p className="text-sm font-medium tracking-wide text-[#e7c8ad]">
                     {item.category}
@@ -81,19 +75,16 @@ export default function GalleryPage() {
                     {item.title}
                   </h2>
                 </div>
-
               </div>
             </article>
           ))}
         </div>
 
-        {/* Empty state */}
         {visibleItems.length === 0 && (
           <div className="mt-12 text-center text-stone-500">
             No Mehendi designs found in this category.
           </div>
         )}
-
       </section>
     </main>
   );
